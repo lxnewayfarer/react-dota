@@ -58,19 +58,22 @@ class App extends React.Component {
         </form>
 
         {
-          <div align="start">
-            <div>
+          <table cellspacing="0" id="maket" align="start">
+          <tr> 
+           <td id="leftcol"><div>
               <p  className="title">Name: {data.name}</p>
               <p className="rating">Rating: {data.rating}</p>
               <p className="wins">Wins: {data.wins}</p>
               <p className="losses">Losses: {data.losses}</p>
               <p className="last">Last match time: {data.last_match_time}</p>
               <p className="tag">Tag: {data.tag}</p>
-            </div>
-            <div>
+            </div></td>
+           <td valign="top"><div>
               <img src={data.logo_url} alt="logo" />
-            </div>
-          </div>
+            </div></td>
+          </tr>
+         </table>
+         
         }
       </div>
     );

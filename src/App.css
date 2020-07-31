@@ -2,6 +2,8 @@ body {
   background-color: #282c34;
   margin-left: 20%;
   margin-top: 3%;
+  background-image: url(http://ilyakhasanov.ru/images/background/50.jpg);
+  background-repeat: repeat;
 }
 .App {
   text-align: center;
