@@ -1,3 +1,8 @@
+body {
+  background-color: #282c34;
+  margin-left: 20%;
+  margin-top: 3%;
+}
 .App {
   text-align: center;
 }
@@ -27,6 +32,12 @@
 .App-link {
   color: #61dafb;
 }
+.title {
+  color: #61dafb;
+}
+.subtitle {
+  color: #d1f5ff;
+}
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +46,40 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+p {
+  color: #cadee4;
+}
+
+input[type=text] {
+  border: none;
+  border-bottom: 2px solid #61dafb;
+  padding: 6px 6px;
+  margin: 8px 0;
+  margin-left: 15px;
+  background-color: transparent;
+  color: white;
+  width: 60px;
+}
+input[type=button], input[type=submit], input[type=reset] {
+  background-color: #17353d;
+  border: none;
+  color: rgb(247, 240, 255);
+  padding: 8px 16px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.rating{
+  color: rgb(255, 243, 173);
+}
+.wins{
+  color: rgb(176, 255, 176);
+}
+.losses{
+  color: rgb(255, 187, 187);
+}
+.tag{
+  color: silver;
 }
