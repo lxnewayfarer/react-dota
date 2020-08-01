@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import moment from "moment";
+import prevArrow from "./assets/left.png";
+import nextArrow from "./assets/right.png";
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +17,9 @@ class App extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlePrevClick = this.handlePrevClick.bind(this);
+    this.handleNextClick = this.handleNextClick.bind(this);
+    this.handleTeamClick = this.handleTeamClick.bind(this);
   }
 
   getData() {
@@ -51,15 +56,18 @@ class App extends React.Component {
     this.setState({ value: event.target.value });
   }
 
-  searcher(name, value){
-    return name.toLowerCase().includes(value.toLowerCase())
-
+  searcher(name, value) {
+    return name.toLowerCase().includes(value.toLowerCase());
   }
-  
+
   selectData() {
-    const founded = this.state.data.find(team => this.searcher(team.name, this.state.value));
-    const index = this.state.data.findIndex(team => this.searcher(team.name, this.state.value));
-    if (!founded){
+    const founded = this.state.data.find((team) =>
+      this.searcher(team.name, this.state.value)
+    );
+    const index = this.state.data.findIndex((team) =>
+      this.searcher(team.name, this.state.value)
+    );
+    if (!founded) {
       this.setState({ isMatch: false });
     } else {
       this.setState({ isMatch: true });
@@ -70,6 +78,22 @@ class App extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.selectData();
+  }
+
+  handleTeamClick(event, i) {
+    event.preventDefault();
+    this.setState({ id: i });
+  }
+
+  handlePrevClick(event) {
+    event.preventDefault();
+    if (this.state.id > 0) this.setState({ id: this.state.id - 1 });
+  }
+
+  handleNextClick(event) {
+    event.preventDefault();
+    if (this.state.id < this.state.data.length)
+      this.setState({ id: this.state.id + 1 });
   }
 
   Form = () => (
@@ -93,16 +117,53 @@ class App extends React.Component {
     </h1>
   );
 
+  Links = () => (
+    <div className="links" align="start">
+      <a href="https://github.com/lxnewayfarer/react-intro" align="start">
+        GitHub repository
+      </a>
+      <a href="https://docs.opendota.com/" align="start">
+        OpenDota API
+      </a>
+    </div>
+  );
+
+  topFive = () => {
+    let content = [];
+    content.push(
+      <p className="title" align="start">
+        Top 5 teams now:
+      </p>
+    );
+    for (let i = 0; i < 5; i++) {
+      content.push(
+        <div
+          class="subtitle team"
+          align="start"
+          onClick={(e) => {
+            this.handleTeamClick(e, i);
+          }}
+        >
+          {i + 1 + ".  "}
+          {this.state.data[i].name}
+          <div className="microLogoContainer">
+            <img src={this.state.data[i].logo_url} alt="micrologo" />
+          </div>
+        </div>
+      );
+    }
+    return content;
+  };
+
   render() {
     const data = this.state.data[this.state.id];
-    //const timestamp = new Date( 1370001284000 );
-    //const last_match_time = moment(data.last_match_time).format("dd.mm.yyyy hh:MM:ss");
 
     if (!this.state.isLoaded)
       return (
         <div>
           <this.Header />
           <h1 className="subtitle">Loading...</h1>
+          <this.Links />
         </div>
       );
     if (!this.state.isMatch)
@@ -111,61 +172,72 @@ class App extends React.Component {
           <this.Header />
           <this.Form />
           <p>Team not found</p>
+          <this.Links />
         </div>
       );
     return (
       <div className="App">
-        <this.Header />
-        <this.Form />
+        <div className="content">
+          <this.Header />
+          <this.Form />
 
-        {
-          <table cellspacing="0" id="maket" align="start">
-            <tr>
-              <td id="leftcol">
-                <div>
-                  <p className="place" align="start">
-                    Place: #{this.state.id + 1}
-                  </p>
-                  <p className="title" align="start">
-                    Name: {data.name}
-                  </p>
-                  <p className="rating" align="start">
-                    Rating: {data.rating}
-                  </p>
-                  <p className="wins" align="start">
-                    Wins: {data.wins}
-                  </p>
-                  <p className="losses" align="start">
-                    Losses: {data.losses}
-                  </p>
-                  <p className="last" align="start">
-                    Last match:{" "}
-                    {moment(data.last_match_time * 1000).format(
-                      "DD.MM.YYYY H:mm:SS"
-                    )}
-                  </p>
-                  <p className="tag" align="start">
-                    Tag: {data.tag}
-                  </p>
-                </div>
-              </td>
-              <td valign="top">
-                <div>
-                  <img src={data.logo_url} alt="logo" />
-                </div>
-              </td>
-            </tr>
-          </table>
-        }
-
-        <div className="footer" align="start">
-          <a href="https://github.com/lxnewayfarer/react-intro" align="start">
-            GitHub
-          </a>
-          <a href="https://docs.opendota.com/" align="start">
-            OpenDota API
-          </a>
+          {
+            <table cellspacing="0" id="maket" align="start">
+              <tr>
+                <td id="leftcol">
+                  <div>
+                    <p className="place" align="start">
+                      Place: #{this.state.id + 1}
+                    </p>
+                    <p className="title" align="start">
+                      Name: {data.name}
+                    </p>
+                    <p className="rating" align="start">
+                      Rating: {data.rating}
+                    </p>
+                    <p className="wins" align="start">
+                      Wins: {data.wins}
+                    </p>
+                    <p className="losses" align="start">
+                      Losses: {data.losses}
+                    </p>
+                    <p className="last" align="start">
+                      Last match:{" "}
+                      {moment(data.last_match_time * 1000).format(
+                        "DD.MM.YYYY H:mm:SS"
+                      )}
+                    </p>
+                    <p className="tag" align="start">
+                      Tag: {data.tag}
+                    </p>
+                    <div className="arrows">
+                      <div className="arrow" onClick={this.handlePrevClick}>
+                        <img src={prevArrow} alt="prev" />
+                      </div>
+                      <div
+                        className="arrow right"
+                        onClick={this.handleNextClick}
+                      >
+                        <img src={nextArrow} alt="next" />
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td valign="top">
+                  <div>
+                    <img src={data.logo_url} alt="logo" />
+                  </div>
+                </td>
+                <td valign="top">
+                  <div className="topfive">
+                    <this.topFive />
+                  </div>
+                </td>
+              </tr>
+            </table>
+          }
         </div>
+        <this.Links />
       </div>
     );
   }
