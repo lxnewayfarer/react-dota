@@ -1,12 +1,13 @@
 body {
   background-color: #282c34;
-  margin-left: 20%;
   margin-top: 3%;
-  background-image: url(http://ilyakhasanov.ru/images/background/50.jpg);
+  margin-left: 10%;
+  background-image: url(./assets/bg.png);
   background-repeat: repeat;
 }
 .App {
   text-align: center;
+  width: 100%;
 }
 
 .App-logo {
@@ -54,7 +55,7 @@ p {
   color: #cadee4;
 }
 
-input[type=text] {
+input[type="text"] {
   border: none;
   border-bottom: 2px solid #61dafb;
   padding: 6px 6px;
@@ -62,26 +63,60 @@ input[type=text] {
   margin-left: 15px;
   background-color: transparent;
   color: white;
-  width: 60px;
+  width: 160px;
 }
-input[type=button], input[type=submit], input[type=reset] {
-  background-color: #17353d;
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  background-color: rgba(0, 0, 0, 0.336);
   border: none;
+  border-bottom: 2px solid #61dafb;
   color: rgb(247, 240, 255);
-  padding: 8px 16px;
+  padding: 6px 16px;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: 0px 8px;
   cursor: pointer;
 }
-.rating{
+.place{
+  color: rgb(255, 199, 173);
+}
+.rating {
   color: rgb(255, 243, 173);
 }
-.wins{
+.wins {
   color: rgb(176, 255, 176);
 }
-.losses{
+.losses {
   color: rgb(255, 187, 187);
 }
-.tag{
+.tag {
   color: silver;
+}
+.label {
+  color: #d1f5ff;
+}
+.footer {
+  left: 0;
+  bottom: 0;
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  background-color: rgba(17, 17, 17, 0.336);
+  padding-left: 10%;
+  padding-top: 10px;
+  color: rgb(210, 210, 255);
+}
+.phantom {
+  display: block;
+  padding: 20px;
+  height: 60px;
+  width: 100%;
+}
+a:link,
+a:hover,
+a:visited,
+a:active {
+  color: rgb(234, 234, 255);
+  text-decoration: none;
+  margin: 10px;
 }
